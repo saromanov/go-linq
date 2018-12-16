@@ -20,13 +20,19 @@ type Linq struct {
 
 // New creates init of the linq
 func New(data interface{}) (*Linq, error) {
-	ok := isSliceType(data)
+	kind := getKind(data)
+	ok := isSliceType(kind)
 	if !ok {
 		return nil, errNoSlice
 	}
 	return &Linq{
 		coll: data,
 	}, nil
+}
+
+// getKind returns type of the input data
+func getKind(data interface{}) reflect.Kind {
+	return reflect.TypeOf(data).Kind()
 }
 
 // isSliceType returns true if input data is slice

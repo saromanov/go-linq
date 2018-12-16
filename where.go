@@ -25,3 +25,8 @@ func (l *Linq) Where(f interface{}) *Linq {
 	}
 	return l
 }
+
+// Invoke provides call of the method
+func invoke(fn interface{}, val reflect.Value) []reflect.Value {
+	return reflect.ValueOf(fn).Call([]reflect.Value{val})
+}

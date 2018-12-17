@@ -27,7 +27,8 @@ func New(data interface{}) (*Linq, error) {
 		return nil, errNoSlice
 	}
 	return &Linq{
-		coll: data,
+		coll:   data,
+		result: makeData(data),
 	}, nil
 }
 
@@ -47,6 +48,15 @@ func (l *Linq) Result() interface{} {
 		return response
 	}
 	return response
+}
+
+func makeData(data interface{}) []reflect.Value {
+	result := []reflect.Value{}
+	s := reflect.ValueOf(data)
+	for i := 0; i < s.Len(); i++ {
+		result = append(result, s.Index(i))
+	}
+	return result
 }
 
 // getKind returns type of the input data

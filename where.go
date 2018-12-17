@@ -23,7 +23,7 @@ func (l *Linq) Where(f interface{}) *Linq {
 			continue
 		}
 		if fResult[0].Bool() {
-			continue
+			l.result = append(l.result, s.Index(i))
 		}
 	}
 	return l

@@ -46,6 +46,12 @@ func (l *Linq) Result() interface{} {
 			response[i] = x.Int()
 		}
 		return response
+	case reflect.Float64:
+		response := make([]float64, len(l.result))
+		for i, x := range l.result {
+			response[i] = x.Float()
+		}
+		return response
 	}
 	return response
 }

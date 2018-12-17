@@ -1,7 +1,6 @@
 package linq
 
 import (
-	"fmt"
 	"reflect"
 )
 
@@ -27,7 +26,6 @@ func (l *Linq) Where(f interface{}) *Linq {
 			continue
 		}
 		if fResult[0].Bool() {
-			fmt.Println(x.Kind())
 			l.result = append(l.result, x)
 		}
 	}

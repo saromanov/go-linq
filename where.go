@@ -19,15 +19,16 @@ func (l *Linq) Where(f interface{}) *Linq {
 	if outIn != 1 {
 		panic("Where: output arguments is not 1")
 	}
-	s := reflect.ValueOf(l.coll)
-	for i := 0; i < s.Len(); i++ {
-		fResult := invoke(f, s.Index(i))
+	oldResult := l.result
+	l.result = l.result[:0]
+	for _, x := range oldResult {
+		fResult := invoke(f, x)
 		if len(fResult) == 0 {
 			continue
 		}
 		if fResult[0].Bool() {
-			fmt.Println(s.Index(i).Kind())
-			l.result = append(l.result, s.Index(i))
+			fmt.Println(x.Kind())
+			l.result = append(l.result, x)
 		}
 	}
 	return l

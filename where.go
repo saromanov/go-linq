@@ -1,6 +1,8 @@
 package linq
 
-import "reflect"
+import (
+	"reflect"
+)
 
 // Where provides filtering on collection
 func (l *Linq) Where(f interface{}) *Linq {
@@ -30,8 +32,12 @@ func (l *Linq) Where(f interface{}) *Linq {
 }
 
 // Result returns response after operations
-func (l *Linq) Result() []reflect.Value {
-	return l.result
+func (l *Linq) Result() interface{} {
+	response := make([]interface{}, len(l.result))
+	for i, x := range l.result {
+		response[i] = reflect.ValueOf(x).Interface()
+	}
+	return response
 }
 
 // Invoke provides call of the method

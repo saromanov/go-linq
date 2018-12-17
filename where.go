@@ -21,7 +21,13 @@ func (l *Linq) Where(f interface{}) *Linq {
 	}
 	s := reflect.ValueOf(l.coll)
 	for i := 0; i < s.Len(); i++ {
-		fmt.Println(s.Index(i).Interface())
+		fResult = invoke(f, s.Index(i))
+		if len(fResult) == 0 {
+			continue
+		}
+		if fResult.Bool() {
+			continue
+		}
 	}
 	return l
 }

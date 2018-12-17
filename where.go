@@ -1,6 +1,7 @@
 package linq
 
 import (
+	"fmt"
 	"reflect"
 )
 
@@ -25,19 +26,11 @@ func (l *Linq) Where(f interface{}) *Linq {
 			continue
 		}
 		if fResult[0].Bool() {
+			fmt.Println(s.Index(i).Kind())
 			l.result = append(l.result, s.Index(i))
 		}
 	}
 	return l
-}
-
-// Result returns response after operations
-func (l *Linq) Result() interface{} {
-	response := make([]interface{}, len(l.result))
-	for i, x := range l.result {
-		response[i] = reflect.ValueOf(x).Interface()
-	}
-	return response
 }
 
 // Invoke provides call of the method

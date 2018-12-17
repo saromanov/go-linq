@@ -31,6 +31,24 @@ func New(data interface{}) (*Linq, error) {
 	}, nil
 }
 
+// Result returns response after operations
+func (l *Linq) Result() interface{} {
+	if len(l.result) == 0 {
+		return nil
+	}
+	var response interface{}
+	first := l.result[0].Kind()
+	switch first {
+	case reflect.Int:
+		response := make([]int64, len(l.result))
+		for i, x := range l.result {
+			response[i] = x.Int()
+		}
+		return response
+	}
+	return response
+}
+
 // getKind returns type of the input data
 func getKind(data interface{}) reflect.Kind {
 	return reflect.TypeOf(data).Kind()

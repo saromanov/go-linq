@@ -1,9 +1,6 @@
 package linq
 
-import (
-	"fmt"
-	"reflect"
-)
+import "reflect"
 
 // Where provides filtering on collection
 func (l *Linq) Where(f interface{}) *Linq {
@@ -21,11 +18,11 @@ func (l *Linq) Where(f interface{}) *Linq {
 	}
 	s := reflect.ValueOf(l.coll)
 	for i := 0; i < s.Len(); i++ {
-		fResult = invoke(f, s.Index(i))
+		fResult := invoke(f, s.Index(i))
 		if len(fResult) == 0 {
 			continue
 		}
-		if fResult.Bool() {
+		if fResult[0].Bool() {
 			continue
 		}
 	}

@@ -16,6 +16,7 @@ type Enumerable interface {
 // Linq defines main structure on collection
 type Linq struct {
 	coll interface{}
+	result []*reflect.Value
 }
 
 // New creates init of the linq

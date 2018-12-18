@@ -1,6 +1,8 @@
 package linq
 
-import "reflect"
+import (
+	"reflect"
+)
 
 // Select defines a method for mapping of the representation
 // of collection on the new form
@@ -24,7 +26,7 @@ func (l *Linq) Select(f interface{}) *Linq {
 		if len(fResult) == 0 {
 			continue
 		}
-		l.result = append(l.result, x)
+		l.result = append(l.result, reflect.ValueOf(fResult[0].Interface()))
 	}
 
 	return l

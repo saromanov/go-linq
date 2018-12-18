@@ -41,6 +41,30 @@ func (l *Linq) Result() interface{} {
 	first := l.result[0].Kind()
 	switch first {
 	case reflect.Int:
+		response := make([]int, len(l.result))
+		for i, x := range l.result {
+			response[i] = int(x.Int())
+		}
+		return response
+	case reflect.Int8:
+		response := make([]int8, len(l.result))
+		for i, x := range l.result {
+			response[i] = int8(x.Int())
+		}
+		return response
+	case reflect.Int16:
+		response := make([]int32, len(l.result))
+		for i, x := range l.result {
+			response[i] = int32(x.Int())
+		}
+		return response
+	case reflect.Int32:
+		response := make([]int32, len(l.result))
+		for i, x := range l.result {
+			response[i] = int32(x.Int())
+		}
+		return response
+	case reflect.Int64:
 		response := make([]int64, len(l.result))
 		for i, x := range l.result {
 			response[i] = x.Int()

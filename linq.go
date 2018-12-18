@@ -76,6 +76,12 @@ func (l *Linq) Result() interface{} {
 			response[i] = x.Float()
 		}
 		return response
+	case reflect.String:
+		response := make([]string, len(l.result))
+		for i, x := range l.result {
+			response[i] = x.String()
+		}
+		return response
 	}
 	return response
 }

@@ -26,7 +26,7 @@ func (l *Linq) Where(f interface{}) *Linq {
 			continue
 		}
 		if fResult[0].Bool() {
-			l.result = append(l.result, x)
+			l.result = append(l.result, reflect.ValueOf(x))
 		}
 	}
 	return l

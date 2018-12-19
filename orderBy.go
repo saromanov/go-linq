@@ -21,11 +21,11 @@ func (l *Linq) OrderBy(f interface{}) *Linq {
 
 	oldResult := l.result
 	l.result = l.result[:0]
-	l.result = sorting(oldResult)
+	l.result = sorting(f, oldResult)
 	return l
 }
 
-func sorting(data []reflect.Value) []reflect.Value {
+func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 	if len(data) == 0 {
 		return data
 	}
@@ -35,7 +35,11 @@ func sorting(data []reflect.Value) []reflect.Value {
 	case reflect.Int:
 		tmp := make([]int, len(data))
 		for i, x := range data {
-			tmp[i] = int(x.Int())
+			fResult := invoke(f, x)
+			if len(fResult) == 0 {
+				continue
+			}
+			tmp[i] = int(fResult[0].Int())
 		}
 		sort.Ints(tmp)
 		for i := range data {

@@ -21,7 +21,28 @@ func (l *Linq) OrderBy(f interface{}) *Linq {
 
 	oldResult := l.result
 	l.result = l.result[:0]
-	sort.Sort(oldResult)
-	l.result = oldResult
+	l.result = sorting(oldResult)
 	return l
+}
+
+func sorting(data []reflect.Value) []reflect.Value {
+	if len(data) == 0 {
+		return data
+	}
+
+	first := data[0].Kind()
+	switch first {
+	case reflect.Int:
+		tmp := make([]int, len(data))
+		for i, x := range data {
+			tmp[i] = int(x.Int())
+		}
+		sort.Ints(tmp)
+		for i := range data {
+			data[i] = reflect.ValueOf(tmp[i])
+		}
+		return data
+	}
+
+	return data
 }

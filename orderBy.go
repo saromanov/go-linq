@@ -60,6 +60,20 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 			data[i] = reflect.ValueOf(tmp[i])
 		}
 		return data
+	case reflect.Float64:
+		tmp := make([]float64, len(data))
+		for i, x := range data {
+			fResult := invoke(f, x)
+			if len(fResult) == 0 {
+				continue
+			}
+			tmp[i] = fResult[0].Float()
+		}
+		sort.Float64s(tmp)
+		for i := range data {
+			data[i] = reflect.ValueOf(tmp[i])
+		}
+		return data
 	}
 
 	return data

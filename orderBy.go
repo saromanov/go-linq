@@ -39,14 +39,23 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 			if len(fResult) == 0 {
 				continue
 			}
-			switch fResult[0].Kind() {
-			case reflect.Int:
-				tmp[i] = int(fResult[0].Int())
-			case reflect.String:
-				tmp[i] = string(fResult[0].String())
-			}
+			tmp[i] = int(fResult[0].Int())
 		}
 		sort.Ints(tmp)
+		for i := range data {
+			data[i] = reflect.ValueOf(tmp[i])
+		}
+		return data
+	case reflect.String:
+		tmp := make([]string, len(data))
+		for i, x := range data {
+			fResult := invoke(f, x)
+			if len(fResult) == 0 {
+				continue
+			}
+			tmp[i] = fResult[0].String()
+		}
+		sort.Strings(tmp)
 		for i := range data {
 			data[i] = reflect.ValueOf(tmp[i])
 		}

@@ -23,7 +23,7 @@ func (l *Linq) OrderBy(f interface{}) *Linq {
 	}
 	oldResult := l.result
 	l.result = l.result[:0]
-	l.result = sorting(f, oldResult)
+	l.result = sortingOrderBy(f, oldResult)
 	l.sorted = true
 	return l
 }
@@ -43,7 +43,7 @@ func validateOrerByInput(f interface{}) error {
 	return nil
 }
 
-func sorting(f interface{}, data []reflect.Value) []reflect.Value {
+func sortingOrderBy(f interface{}, data []reflect.Value) []reflect.Value {
 	if len(data) == 0 {
 		return data
 	}

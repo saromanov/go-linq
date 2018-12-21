@@ -5,6 +5,13 @@ import (
 	"sort"
 )
 
+// sortingInt is helpful method for sorting of
+// ints
+type sortingInt struct {
+	Key   reflect.Value
+	Value int64
+}
+
 // OrderBy provides sorting of elements to increasing
 func (l *Linq) OrderBy(f interface{}) *Linq {
 	if !isFunction(f) {
@@ -54,7 +61,12 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 			if len(fResult) == 0 {
 				continue
 			}
-			tmp[i] = fResult[0].String()
+
+			if fResult[0].Kind() == reflect.String {
+				tmp[i] = fResult[0].String()
+				continue
+			}
+
 		}
 		sort.Strings(tmp)
 		for i := range data {

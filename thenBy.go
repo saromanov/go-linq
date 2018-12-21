@@ -22,7 +22,7 @@ func (l *Linq) ThenBy(f interface{}) *Linq {
 
 	oldResult := l.result
 	l.result = l.result[:0]
-	l.result = sorting(f, oldResult)
+	l.result = sortingOrderBy(f, oldResult)
 	l.sorted = true
 	return l
 }

@@ -67,6 +67,9 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 			if len(fResult) == 0 {
 				continue
 			}
+			if fResult[0].Kind() != reflect.Float64 {
+				continue
+			}
 			tmp[i] = fResult[0].Float()
 		}
 		sort.Float64s(tmp)

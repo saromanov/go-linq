@@ -1,6 +1,7 @@
 package linq
 
 import (
+	"errors"
 	"reflect"
 	"sort"
 
@@ -11,28 +12,35 @@ import (
 // ints
 type sortingInt struct {
 	Key   reflect.Value
-	Value int64
+	Value interface{}
 }
 
 // OrderBy provides sorting of elements to increasing
 func (l *Linq) OrderBy(f interface{}) *Linq {
-	if !isFunction(f) {
-		panic("Where: input data not a function")
+	err := validateOrerByInput(f)
+	if err != nil {
+		panic(err)
 	}
-	numIn := reflect.TypeOf(f).NumIn()
-	if numIn != 1 {
-		panic("Where: input arguments is not 1")
-	}
-	outIn := reflect.TypeOf(f).NumOut()
-	if outIn != 1 {
-		panic("Where: output arguments is not 1")
-	}
-
 	oldResult := l.result
 	l.result = l.result[:0]
 	l.result = sorting(f, oldResult)
 	l.sorted = true
 	return l
+}
+
+func validateOrerByInput(f interface{}) error {
+	if !isFunction(f) {
+		return errors.New("OrderBy: input data not a function")
+	}
+	numIn := reflect.TypeOf(f).NumIn()
+	if numIn != 1 {
+		return errors.New("OrderBy: input arguments is not 1")
+	}
+	outIn := reflect.TypeOf(f).NumOut()
+	if outIn != 1 {
+		return errors.New("OrderBy: output arguments is not 1")
+	}
+	return nil
 }
 
 func sorting(f interface{}, data []reflect.Value) []reflect.Value {
@@ -85,7 +93,7 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 		}
 		if len(helpStr) > 0 {
 			slice.Sort(helpStr[:], func(i, j int) bool {
-				return helpStr[i].Value < helpStr[j].Value
+				return helpStr[i].Value.(int64) < helpStr[j].Value.(int64)
 			})
 			for i, x := range helpStr {
 				data[i] = reflect.Value(x.Key)

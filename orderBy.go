@@ -71,12 +71,12 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 			}
 
 			helpStr[i] = sortingInt{
-				Key:   fResult[0],
+				Key:   x,
 				Value: fResult[0].Int(),
 			}
 
 		}
-		if len(tmp) > 0 {
+		if tmp[0] != "" {
 			sort.Strings(tmp)
 			for i := range data {
 				data[i] = reflect.ValueOf(tmp[i])

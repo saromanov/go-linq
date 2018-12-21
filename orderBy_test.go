@@ -19,3 +19,39 @@ func TestOrderbyBasic(t *testing.T) {
 		}
 	}
 }
+
+func TestOrderbyBasicString(t *testing.T) {
+	l, err := New([]string{"cde", "abd"})
+	if err != nil {
+		panic(err)
+	}
+	result := l.OrderBy(func(x string) string {
+		return x
+	})
+
+	expected := []string{"abd", "cde"}
+	resultString := result.Result().([]string)
+	for i, x := range expected {
+		if resultString[i] != x {
+			t.Errorf("invalid response. Expected: %s. Found %s", x, resultString[i])
+		}
+	}
+}
+
+func TestOrderbyBasicFloat64(t *testing.T) {
+	l, err := New([]float64{2.5, 3.5, 2, 1})
+	if err != nil {
+		panic(err)
+	}
+	result := l.OrderBy(func(x float64) float64 {
+		return x
+	})
+
+	expected := []float64{1.0, 2.0, 2.5, 3.5}
+	resultFloat64 := result.Result().([]float64)
+	for i, x := range expected {
+		if resultFloat64[i] != x {
+			t.Errorf("invalid response. Expected: %f. Found %f", x, resultFloat64[i])
+		}
+	}
+}

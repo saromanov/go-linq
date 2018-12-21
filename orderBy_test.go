@@ -55,3 +55,26 @@ func TestOrderbyBasicFloat64(t *testing.T) {
 		}
 	}
 }
+
+func TestOrderbyMultiple(t *testing.T) {
+	l, err := New([]float64{2.5, 3.5, 2, 1, 6, 7})
+	if err != nil {
+		panic(err)
+	}
+	result := l.Where(func(x float64) bool {
+		if x < 6 {
+			return true
+		}
+		return false
+	}).OrderBy(func(x float64) float64 {
+		return x
+	})
+
+	expected := []float64{1.0, 2.0, 2.5, 3.5}
+	resultFloat64 := result.Result().([]float64)
+	for i, x := range expected {
+		if resultFloat64[i] != x {
+			t.Errorf("invalid response. Expected: %f. Found %f", x, resultFloat64[i])
+		}
+	}
+}

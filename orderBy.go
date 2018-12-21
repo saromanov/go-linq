@@ -3,6 +3,7 @@ package linq
 import (
 	"reflect"
 	"sort"
+	"github.com/bradfitz/slice"
 )
 
 // sortingInt is helpful method for sorting of
@@ -56,6 +57,7 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 		return data
 	case reflect.String:
 		tmp := make([]string, len(data))
+		helpStr := make([]sortingInt, len(data))
 		for i, x := range data {
 			fResult := invoke(f, x)
 			if len(fResult) == 0 {
@@ -67,8 +69,20 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 				continue
 			}
 
+			helpStr[i] = sortingInt{
+				Key:   fResult[0],
+				Value: fResult[0].Int(),
+			}
+
 		}
-		sort.Strings(tmp)
+		if len(tmp) > 0 {
+			sort.Strings(tmp)
+		}
+		if len(helpStr) > 0 {
+			slice.Sort(helpStr[:], func(i,j int) bool {
+				return helpStr[i].Value < helpStr[j].Value
+			})
+		}
 		for i := range data {
 			data[i] = reflect.ValueOf(tmp[i])
 		}

@@ -3,6 +3,7 @@ package linq
 import (
 	"reflect"
 	"sort"
+
 	"github.com/bradfitz/slice"
 )
 
@@ -77,16 +78,19 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 		}
 		if len(tmp) > 0 {
 			sort.Strings(tmp)
+			for i := range data {
+				data[i] = reflect.ValueOf(tmp[i])
+			}
+			return data
 		}
 		if len(helpStr) > 0 {
-			slice.Sort(helpStr[:], func(i,j int) bool {
+			slice.Sort(helpStr[:], func(i, j int) bool {
 				return helpStr[i].Value < helpStr[j].Value
 			})
+			for i, x := range helpStr {
+				data[i] = reflect.Value(x.Key)
+			}
 		}
-		for i := range data {
-			data[i] = reflect.ValueOf(tmp[i])
-		}
-		return data
 	case reflect.Float64:
 		tmp := make([]float64, len(data))
 		for i, x := range data {

@@ -17,6 +17,7 @@ type Enumerable interface {
 type Linq struct {
 	coll   interface{}
 	result []reflect.Value
+	sorted bool
 }
 
 // New creates init of the linq

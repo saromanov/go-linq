@@ -22,6 +22,7 @@ func (l *Linq) OrderBy(f interface{}) *Linq {
 	oldResult := l.result
 	l.result = l.result[:0]
 	l.result = sorting(f, oldResult)
+	l.sorted = true
 	return l
 }
 

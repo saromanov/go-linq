@@ -90,6 +90,7 @@ func sorting(f interface{}, data []reflect.Value) []reflect.Value {
 			for i, x := range helpStr {
 				data[i] = reflect.Value(x.Key)
 			}
+			return data
 		}
 	case reflect.Float64:
 		tmp := make([]float64, len(data))

@@ -3,6 +3,8 @@ package linq
 import (
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestFirst(t *testing.T) {
@@ -28,10 +30,7 @@ func TestFirstEmpty(t *testing.T) {
 	result := l.First(func(x string) bool {
 		return true
 	})
-	resp := result.Result()
-	if resp != nil {
-		t.Errorf("result should be empty")
-	}
+	assert.Nil(t, result.Result())
 }
 
 func TestFirstWithPrefix(t *testing.T) {

@@ -12,7 +12,7 @@ func (l *Linq) First(f interface{}) *Linq {
 		panic(err)
 	}
 
-	oldResult := l.result
+	l.result = first(f, l.result)
 	return l
 }
 

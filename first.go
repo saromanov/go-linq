@@ -1,5 +1,10 @@
 package linq
 
+import (
+	"errors"
+	"reflect"
+)
+
 // First provides getting of the first element from collection
 func (l *Linq) First(f interface{}) *Linq {
 	err := validateFirstFunc(f)

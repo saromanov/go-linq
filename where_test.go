@@ -1,6 +1,10 @@
 package linq
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestWhereIntBasic(t *testing.T) {
 	fp, _ := New([]int{2, 4, 5, 8})
@@ -10,13 +14,9 @@ func TestWhereIntBasic(t *testing.T) {
 		}
 		return false
 	})
-	expected := []int64{4, 5, 8}
-	resultInt := result.Result().([]int64)
-	for i, x := range expected {
-		if resultInt[i] != x {
-			t.Errorf("invalid response. Expected: %d. Found %d", x, resultInt[i])
-		}
-	}
+	expected := []int{4, 5, 8}
+	resultInt := result.Result().([]int)
+	assert.Equal(t, resultInt, expected, "slices is not equal")
 }
 
 func TestWhereIntMultiple(t *testing.T) {
@@ -32,13 +32,9 @@ func TestWhereIntMultiple(t *testing.T) {
 		}
 		return false
 	})
-	expected := []int64{15, 20}
-	resultInt := result.Result().([]int64)
-	for i, x := range expected {
-		if resultInt[i] != x {
-			t.Errorf("invalid response. Expected: %d. Found %d", x, resultInt[i])
-		}
-	}
+	expected := []int{15, 20}
+	resultInt := result.Result().([]int)
+	assert.Equal(t, resultInt, expected, "slices is not equal")
 }
 
 func TestWhereFloatBasic(t *testing.T) {
@@ -51,9 +47,5 @@ func TestWhereFloatBasic(t *testing.T) {
 	})
 	expected := []float64{2.9, 3.2}
 	resultInt := result.Result().([]float64)
-	for i, x := range expected {
-		if resultInt[i] != x {
-			t.Errorf("invalid response. Expected: %f. Found %f", x, resultInt[i])
-		}
-	}
+	assert.Equal(t, resultInt, expected, "slices is not equal")
 }

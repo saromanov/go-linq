@@ -20,7 +20,7 @@ func last(f interface{}, data []reflect.Value) []reflect.Value {
 		return data
 	}
 
-	for i := len(data); i > 0; i-- {
+	for i := len(data) - 1; i > 0; i-- {
 		resp := invoke(f, data[i])
 		if len(resp) == 0 {
 			continue

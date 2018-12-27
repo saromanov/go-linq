@@ -11,8 +11,29 @@ func (l *Linq) First(f interface{}) *Linq {
 	if err != nil {
 		panic(err)
 	}
+
 	oldResult := l.result
 	return l
+}
+
+func first(f interface{}, data []reflect.Value) []reflect.Value {
+	if len(data) == 0 {
+		return data
+	}
+
+	for _, x := range data {
+		resp := invoke(f, x)
+		if len(resp) == 0 {
+			continue
+		}
+		if resp[0].Bool() {
+			return []reflect.Value{
+				reflect.ValueOf(x.Interface()),
+			}
+		}
+	}
+
+	return []reflect.Value{}
 }
 
 func validateFirstFunc(f interface{}) error {

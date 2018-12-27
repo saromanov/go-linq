@@ -17,9 +17,7 @@ func TestFirst(t *testing.T) {
 		return true
 	})
 	resp := result.Result().([]string)
-	if strings.Compare(resp[0], "Alfa Romeo") != 0 {
-		t.Errorf("strings is not equal")
-	}
+	assert.Equal(t, resp[0], "Alfa Romeo", "strings should be equal")
 }
 
 func TestFirstEmpty(t *testing.T) {
@@ -43,7 +41,5 @@ func TestFirstWithPrefix(t *testing.T) {
 		return strings.HasPrefix(x, "T")
 	})
 	resp := result.Result().([]string)
-	if strings.Compare(resp[0], "Toyota") != 0 {
-		t.Errorf("strings is not equal")
-	}
+	assert.Equal(t, resp[0], "Toyota", "strings should be equal")
 }

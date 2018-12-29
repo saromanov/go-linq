@@ -42,7 +42,7 @@ In this example: First, create a Linq object, then apply of the Where method wit
 
 `Select`
 
-Select method to modify the elements in an array.
+Select method to modify the elements on array
 
 ```go
 package main

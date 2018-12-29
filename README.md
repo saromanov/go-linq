@@ -1,5 +1,7 @@
 Implementation of [LINQ](https://msdn.microsoft.com/en-us/library/bb308959.aspx) queries on Golang
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/saromanov/go-linq)](https://goreportcard.com/report/github.com/saromanov/go-linq)
+
 ## Goal
 
 Simplify operations over slices and study of working of reflection

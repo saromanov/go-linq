@@ -30,15 +30,15 @@ func (l *Linq) OrderBy(f interface{}) *Linq {
 
 func validateOrerByInput(f interface{}) error {
 	if !isFunction(f) {
-		return errors.New("OrderBy: input data not a function")
+		return errors.New("orderBy: input data not a function")
 	}
 	numIn := reflect.TypeOf(f).NumIn()
 	if numIn != 1 {
-		return errors.New("OrderBy: input arguments is not 1")
+		return errors.New("orderBy: input arguments is not 1")
 	}
 	outIn := reflect.TypeOf(f).NumOut()
 	if outIn != 1 {
-		return errors.New("OrderBy: output arguments is not 1")
+		return errors.New("orderBy: output arguments is not 1")
 	}
 	return nil
 }

@@ -103,10 +103,7 @@ func getKind(data interface{}) reflect.Kind {
 
 // isSliceType returns true if input data is slice
 func isSliceType(k reflect.Kind) bool {
-	if k == reflect.Slice {
-		return true
-	}
-	return false
+	return k == reflect.Slice
 }
 
 // isFunction returns true if input data is a function

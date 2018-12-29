@@ -111,8 +111,5 @@ func isSliceType(k reflect.Kind) bool {
 
 // isFunction returns true if input data is a function
 func isFunction(data interface{}) bool {
-	if reflect.TypeOf(data).Kind() == reflect.Func {
-		return true
-	}
-	return false
+	return reflect.TypeOf(data).Kind() == reflect.Func
 }

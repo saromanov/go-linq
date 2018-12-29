@@ -92,11 +92,11 @@ func sortingOrderBy(f interface{}, data []reflect.Value) []reflect.Value {
 			return data
 		}
 		if len(helpStr) > 0 {
-			slice.Sort(helpStr[:], func(i, j int) bool {
+			slice.Sort(helpStr, func(i, j int) bool {
 				return helpStr[i].Value.(int64) < helpStr[j].Value.(int64)
 			})
 			for i, x := range helpStr {
-				data[i] = reflect.Value(x.Key)
+				data[i] = x.Key
 			}
 			return data
 		}

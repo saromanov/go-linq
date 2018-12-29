@@ -38,15 +38,15 @@ func first(f interface{}, data []reflect.Value) []reflect.Value {
 
 func validateFirstFunc(f interface{}) error {
 	if !isFunction(f) {
-		return errors.New("First: input data not a function")
+		return errors.New("first: input data not a function")
 	}
 	numIn := reflect.TypeOf(f).NumIn()
 	if numIn != 1 {
-		return errors.New("First: input arguments is not 1")
+		return errors.New("first: input arguments is not 1")
 	}
 	outIn := reflect.TypeOf(f).NumOut()
 	if outIn != 1 {
-		return errors.New("First: output arguments is not 1")
+		return errors.New("first: output arguments is not 1")
 	}
 	return nil
 }

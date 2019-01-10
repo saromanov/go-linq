@@ -3,6 +3,7 @@ Implementation of [LINQ](https://msdn.microsoft.com/en-us/library/bb308959.aspx)
 [![Go Report Card](https://goreportcard.com/badge/github.com/saromanov/go-linq)](https://goreportcard.com/report/github.com/saromanov/go-linq)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ba9a078e624a4cccbce8ef15c7ad17d8)](https://app.codacy.com/app/saromanov/go-linq?utm_source=github.com&utm_medium=referral&utm_content=saromanov/go-linq&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/saromanov/go-linq.svg?branch=master)](https://travis-ci.org/saromanov/go-linq)
+[![Coverage Status](https://coveralls.io/repos/github/saromanov/go-linq/badge.svg?branch=master)](https://coveralls.io/github/saromanov/go-linq?branch=master)
 
 ## Goal
 
@@ -11,7 +12,7 @@ Simplify operations over slices and study of working of reflection
 ## Queries
 
 Supported queries:
-* Where
+*  Where
 
 `Where`
 
@@ -76,6 +77,5 @@ func main() {
 		return x.Key
 	}).Result().([]int))
 
-}
-```
+}```
 

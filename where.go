@@ -36,3 +36,8 @@ func (l *Linq) Where(f interface{}) *Linq {
 func invoke(fn interface{}, val reflect.Value) []reflect.Value {
 	return reflect.ValueOf(fn).Call([]reflect.Value{val})
 }
+
+// Invoke provides call of the method with two arguments
+func invoke2(fn interface{}, val, val2 reflect.Value) []reflect.Value {
+	return reflect.ValueOf(fn).Call([]reflect.Value{val, val2})
+}

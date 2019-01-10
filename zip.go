@@ -19,9 +19,6 @@ func (l *Linq) Zip(coll interface{}, f interface{}) *Linq {
 	l.result = l.result[:0]
 	for i := 0; i < length; i++ {
 		fResult := invoke2(f, data[i], tmp[i])
-		if len(fResult) == 0 {
-			continue
-		}
 		l.result = append(l.result, reflect.ValueOf(fResult[0].Interface()))
 	}
 	return l

@@ -30,3 +30,20 @@ func TestZip(t *testing.T) {
 	assert.Equal(t, res2, []int{3, 6, 8}, "results should be equal")
 
 }
+
+func TestZipInvalidMethod(t *testing.T) {
+	l, err := New([]string{"Alfa Romeo", "Aston Martin", "Audi", "Nissan", "Chevrolet", "Chrysler", "Dodge", "BMW",
+		"Ferrari", "Bentley", "Ford", "Lexus", "Mercedes", "Toyota", "Volvo", "Subaru"})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+
+	l.Zip([]int{1, 2, 3}, 5)
+
+}

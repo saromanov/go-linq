@@ -22,9 +22,6 @@ func last(f interface{}, data []reflect.Value) []reflect.Value {
 
 	for i := len(data) - 1; i > 0; i-- {
 		resp := invoke(f, data[i])
-		if len(resp) == 0 {
-			continue
-		}
 		if resp[0].Bool() {
 			return []reflect.Value{
 				reflect.ValueOf(data[i].Interface()),

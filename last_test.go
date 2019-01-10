@@ -43,3 +43,20 @@ func TestLastWithPrefix(t *testing.T) {
 	resp := result.Result().([]string)
 	assert.Equal(t, resp[0], "Toyota", "strings should be equal")
 }
+
+func TestLastInvalidMethod(t *testing.T) {
+	l, err := New([]string{})
+	if err != nil {
+		panic(err)
+	}
+
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	l.Last(func(x string) {
+		return
+	})
+
+}

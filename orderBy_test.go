@@ -96,3 +96,63 @@ func TestOrderbyInvalid(t *testing.T) {
 		}
 	}
 }
+
+func TestOrderByInvalidMethod(t *testing.T) {
+	l, err := New([]string{})
+	if err != nil {
+		panic(err)
+	}
+
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	l.OrderBy(func(x string) {
+		return
+	})
+
+}
+
+func TestOrderByInvalidFunction1(t *testing.T) {
+	l, err := New([]string{})
+	if err != nil {
+		panic(err)
+	}
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	l.OrderBy("AAA")
+}
+
+func TestOrderByInvalidFunction2(t *testing.T) {
+	l, err := New([]string{})
+	if err != nil {
+		panic(err)
+	}
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	l.OrderBy(func(x, y, z string) string {
+		return x
+	})
+}
+
+func TestOrderByInvalidFunction3(t *testing.T) {
+	l, err := New([]string{})
+	if err != nil {
+		panic(err)
+	}
+	defer func() {
+		if r := recover(); r == nil {
+			t.Errorf("The code did not panic")
+		}
+	}()
+	l.OrderBy(func(x string) (string, string) {
+		return x, x
+	})
+}

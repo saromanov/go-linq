@@ -6,3 +6,7 @@ steps:
     commands:
     - go get ./...
     - go test
+  second:
+    name: "par"
+    image: golang:1.10
+    parallel: true

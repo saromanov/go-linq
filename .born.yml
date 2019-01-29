@@ -2,7 +2,7 @@ pipeline: "test"
 name: "go-linq"
 steps:
   first:
-    image: golang:latest
+    image: golang:1.11
     commands:
     - go get ./...
     - go test
